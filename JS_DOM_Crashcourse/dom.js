@@ -1,93 +1,58 @@
-// EXAMNINE THE DOCUMENT OBJECT
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
 
-// console.dir(document)
-// console.log(document.domain)
-// console.log(document.URL)
-// console.log(document.title)
-// console.log(document.doctype)
-// console.log(document.head)
-// console.log(document.body)
-// console.log(document.all)
-// console.log(document.all[10])
-// console.log(document.forms)
-// console.log(document.links)
-// console.log(document.images)
+// Form Submit Event
+form.addEventListener('submit', addItem);
+// Delete Event
+itemList.addEventListener('click', removeItem);
+// Filter Event
+filter.addEventListener('keyup', filterItems);
 
+function addItem(e) {
+    e.preventDefault();
+    
+    // Get Input Value
+    var newItem = document.getElementById('item').value;
 
-// getElementById
+    // Create New li Element
+    var li = document.createElement('li');
+    // Add Class
+    li.className = 'list-group-item';
+    // Add text node with input value
+    li.appendChild(document.createTextNode(newItem));
+    // Create del button element
+    var deleteBtn = document.createElement('button');
+    // Add classes to delete button
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+    // Append text node
+    deleteBtn.appendChild(document.createTextNode('X'));
+    // Append button to li
+    li.appendChild(deleteBtn);
+    // Appen li to list
+    itemList.appendChild(li);
+    
+}
 
-// var headerTitle = document.getElementById('header-title');
-// headerTitle.textContent = "Hello";
-// headerTitle.innerText = "Hello";
-// headerTitle.innerHTML = "<h3>Hello</h3>";
-// headerTitle.style.borderBottom = "solid 3px #000";
+function removeItem(e) {
+    if(e.target.classList.contains('delete')){
+        if(confirm('Are You Sure?')){
+            var li = e.target.parentElement;
+            itemList.removeChild(li);
+        }
+    }
+}
 
-
-// GetElementsByClassname
-
-// var items = document.getElementsByClassName('list-group-item');
-// console.log(items[2]);
-// items[1].textContent = "Hello 2"
-// items[1].style.fontWeight = "bold"
-
-
-// GetElementsByTagName
-
-// var li = document.getElementsByTagName('li');
-// console.log(li);
-
-
-// querySelector
-
-// var header = document.querySelector('#main-header');
-// console.log(header);
-// header.style.borderBottom = '2pt solid black';
-
-// var input = document.querySelector('input');
-// input.value = 'Hello world'
-
-// var submit = document.querySelector('input[type="submit"]');
-// submit.value = 'SEND';
-
-// var item = document.querySelector('.list-group-item');
-// item.style.color = 'red';
-
-// var lastItem = document.querySelector('.list-group-item:last-child');
-// lastItem.style.color = 'blue';
-
-
-// querySelectorAll
-
-// var titles = document.querySelectorAll('.title');
-// console.log(titles);
-
-// var odd = document.querySelectorAll('li:nth-child(odd)');
-
-// for(var i = 0; i < odd.length; i++) {
-//     odd[i].style.backgroundColor = "#f4f4f4";
-// }
-
-
-// TRAVERSING THE DOM
-
-var itemList = document.querySelector('#items');
-
-// parentNode
-// console.log(itemList.parentNode);
-// itemList.parentNode.style.backgroundColor = '#f4f4f4';
-// itemList.parentNode.parentNode
-
-// parentElement - similar to parentNode
-// console.log(itemList.parentElement);
-
-// childNodes - also selects whitespace - don't use
-// console.log(itemList.childNodes);
-
-// children - use instead of childNodes
-// console.log(itemList.children);
-// console.log(itemList.children[1]);
-
-// firstChild - includes whitespace - don't use
-// lastChild - includes whitespace - don't use
-
-// firstElementChild - use instead of firstChild
+function filterItems(e) {
+    // Convert to lowercase
+    var text = e.target.value.toLowerCase();
+    var items = itemList.getElementsByTagName('li');
+    Array.from(items).forEach(function(item){
+        var itemName = item.firstChild.textContent;
+        if(itemName.toLowerCase().indexOf(text) != -1){
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    })
+}
