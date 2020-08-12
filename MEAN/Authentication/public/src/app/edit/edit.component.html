@@ -1,0 +1,16 @@
+<h3 class="page-header">Edit User Info</h3>
+<form (submit)="onEditSubmit()" class="w-75">
+  <div class="form-group">
+    <input type="text" [ngModel]="user?.name" (ngModelChange)="user.name = $event" name="user.name" class="form-control"
+      placeholder="full name">
+  </div>
+  <div class="form-group">
+    <input type="text" [ngModel]="user?.userName" (ngModelChange)="user.userName = $event" name="user.userName"
+      class="form-control" placeholder="username">
+  </div>
+  <div class="form-group">
+    <input type="email" [ngModel]="user?.email" (ngModelChange)="user.email = $event" name="user.email"
+      class="form-control" placeholder="email address">
+  </div>
+  <input class="btn btn-primary" type="submit" value="Submit">
+</form>
