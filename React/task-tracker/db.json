@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "text": "Finish React CC",
+      "day": "Jan 24th at 6:00pm ",
+      "reminder": false,
+      "id": 5
+    },
+    {
+      "text": "Learn about async & await",
+      "day": "Jan 25th at 4:30pm",
+      "reminder": true,
+      "id": 6
+    },
+    {
+      "text": "Dentist Appointment",
+      "day": "Jan 26th at 8:00am",
+      "reminder": true,
+      "id": 7
+    }
+  ]
+}
